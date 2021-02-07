@@ -12,10 +12,14 @@
   ([keys] (service keys {}))
   ([keys options]
    (let [Ctr (apply j/get-in [AWS (map csk/->PascalCase keys)])]
-     (new Ctr (->> options
-                   (p/map-keys csk/->camelCase)
-                   (p/map-vals #(cske/transform-keys csk/->PascalCase %))
-                   ->js)))))
+     (new Ctr (cond-> options
+
+                (map? options)
+                (->> (p/map-keys csk/->camelCase)
+                     (p/map-vals #(cske/transform-keys csk/->PascalCase %)))
+
+                :always
+                ->js)))))
 
 (defn call
   [service method params]

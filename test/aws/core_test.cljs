@@ -10,4 +10,8 @@
                                :convert-empty-values true})]
 
       (t/is (j/get-in client [:options :convertEmptyValues]))
-      (t/is (= (j/get-in client [:options :params :TableName]) "foo-bar")))))
+      (t/is (= (j/get-in client [:options :params :TableName]) "foo-bar"))))
+
+  (t/testing "Endpoint"
+    (let [endpoint (sut/service [:endpoint] "http://localhost:8000")]
+      (t/is (= (j/get-in endpoint [:href]) "http://localhost:8000/")))))
