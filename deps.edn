@@ -1,15 +1,14 @@
-{:deps {org.clojure/clojure {:mvn/version "1.10.2"}
-        org.clojure/clojurescript {:mvn/version "1.10.773"}
-        applied-science/js-interop {:mvn/version "0.2.7"}
-        camel-snake-kebab/camel-snake-kebab {:mvn/version "0.4.2"}
-        cljs-bean/cljs-bean {:mvn/version "1.6.0"}
-        funcool/promesa {:mvn/version "6.0.0"}
-        metosin/potpuri {:mvn/version "0.5.3"}}
+{:deps {org.clojure/clojure {:mvn/version "1.10.3"}
+        org.clojure/clojurescript {:mvn/version "1.10.879"}
+        applied-science/js-interop {:mvn/version "0.3.0"}
+        cljs-bean/cljs-bean {:mvn/version "1.7.0"}
+        funcool/promesa {:mvn/version "6.0.2"}}
+
  :paths ["src/main"]
 
  :aliases
  {:outdated
-  {:extra-deps {antq/antq {:mvn/version "RELEASE"}}
+  {:extra-deps {com.github.liquidz/antq {:mvn/version "RELEASE"}}
    :main-opts ["-m" "antq.core"]}
 
   :test

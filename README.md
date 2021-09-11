@@ -1,5 +1,7 @@
 # aws-cljs
 
+**Warning: This library is in pre-alpha!**
+
 ## Scripts
 
 ```bash
