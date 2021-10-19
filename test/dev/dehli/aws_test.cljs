@@ -1,6 +1,5 @@
 (ns dev.dehli.aws-test
   (:require [cljs.test :as t]
-            [cljs-bean.core :refer [->js]]
             [dev.dehli.aws :as sut]
             [promesa.core :as p]))
 
