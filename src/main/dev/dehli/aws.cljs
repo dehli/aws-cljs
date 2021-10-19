@@ -1,7 +1,7 @@
 (ns dev.dehli.aws
   (:require ["aws-sdk" :as AWS]
             [applied-science.js-interop :as j]
-            [cljs-bean.core :refer [->clj ->js]]
+            [cljs-bean.core :refer [->clj ->js bean]]
             [promesa.core :as p]))
 
 (defn client
@@ -17,4 +17,7 @@
   (-> client
       (j/call op (->js request))
       (j/call :promise)
-      (p/then ->clj)))
+      (p/then ->clj)
+      (p/catch #(throw (ex-info (j/get % :message)
+                                (bean %)
+                                %)))))
