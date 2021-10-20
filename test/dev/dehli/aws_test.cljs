@@ -18,4 +18,7 @@
       (t/is (some? (:stack (ex-data error))))
       (t/is (some? (:time (ex-data error))))
 
+      (t/is (= (set (keys (ex-data error)))
+               #{:code :message :name :stack :time}))
+
       (done))))
