@@ -14,7 +14,9 @@
 
 (defn- ->ex-data [e]
   (let [;; Keys that we don't want showing up
-        deny-set #{"constructor"
+        deny-set #{"clojure$core$protocols$Datafiable$"
+                   "clojure$core$protocols$Datafiable$datafy$arity$"
+                   "constructor"
                    "promesa$protocols$IPromiseFactory$"
                    "promesa$protocols$IPromiseFactory$_promise$arity$1"
                    "toString"}]
