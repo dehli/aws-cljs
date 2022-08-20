@@ -1,9 +1,13 @@
 (ns dev.dehli.aws
-  (:require ["aws-sdk" :as AWS]
+  (:require ["aws-sdk" :as aws-sdk]
             [applied-science.js-interop :as j]
             [cljs-bean.core :refer [->clj ->js]]
             [goog.object :as gobj]
             [promesa.core :as p]))
+
+(def ^:private AWS
+  "Allows this library to be consumed by cljs, shadow-cljs, and nbb"
+  (or (j/get aws-sdk :default) aws-sdk))
 
 (defn client
   "Constructs a service interface object."
