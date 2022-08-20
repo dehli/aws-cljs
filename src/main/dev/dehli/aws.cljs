@@ -36,3 +36,19 @@
       (p/catch #(throw (ex-info (j/get % :message)
                                 (->ex-data %)
                                 %)))))
+
+(defn all-pages
+  [client {:keys [key last-key op request start-key]}]
+  (p/loop [loop-items [] loop-last-key nil]
+    (p/let [request*
+            (assoc request start-key loop-last-key)
+
+            response
+            (invoke client {:op op :request request*})
+
+            all-items
+            (into loop-items (get response key))]
+
+      (if-let [current-last-key (get response last-key)]
+        (p/recur all-items current-last-key)
+        all-items))))
