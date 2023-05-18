@@ -42,17 +42,29 @@
                                 %)))))
 
 (defn all-pages
-  [client {:keys [key last-key op request start-key]}]
+  [client {:keys [key last-key limit op request start-key]}]
   (p/loop [loop-items [] loop-last-key nil]
     (p/let [request*
-            (assoc request start-key loop-last-key)
+            (cond-> request
+              (some? loop-last-key)
+              (assoc start-key loop-last-key)
+
+              (some? limit)
+              (assoc :Limit limit))
 
             response
             (invoke client {:op op :request request*})
 
             all-items
-            (into loop-items (get response key))]
+            (into loop-items (get response key))
 
-      (if-let [current-last-key (get response last-key)]
+            current-last-key
+            (get response last-key)
+
+            below-limit?
+            (or (nil? limit)
+                (< (count all-items) limit))]
+
+      (if (and (some? current-last-key) below-limit?)
         (p/recur all-items current-last-key)
         all-items))))
